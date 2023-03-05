@@ -1,15 +1,18 @@
-import styles from './Game.module.scss'
+import styles from './GamePage.module.scss'
 import fetchPokemon from '../../functions/fetchPokemon'
 import getRandomNumber from '../../functions/getRandomNumber'
 import { useEffect, useState } from 'react'
 import IPokemon from '../../types/IPokemon'
+import Game from './Game/Game'
 
 
-export default function Game() {
+
+export default function GamePage() {
     const [pokemons, setPokemons] = useState<IPokemon[]>([])
 
+
     useEffect(() => {
-        const data: any = []
+        const data: Promise<IPokemon>[] = []
         for (let i = 0; i < 3; i++) {
             data.push(fetchPokemon(getRandomNumber(1, 1000)))
         }
@@ -20,15 +23,10 @@ export default function Game() {
     return (
         <div className={styles.game}>
             {
-                pokemons &&
-                pokemons.map((pokemon) => (
-                    <div className={styles.pokemon_item} key={pokemon.id}>
-                        <h1>{pokemon.name}</h1>
-                        <img src={pokemon.img} alt="pokemonPicture" />
-                    </div>
-                ))
-
+                pokemons.length && <Game pokemons={pokemons} />
             }
         </div>
     )
+
+
 }
