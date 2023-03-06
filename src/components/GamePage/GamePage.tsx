@@ -4,26 +4,27 @@ import getRandomNumber from '../../functions/getRandomNumber'
 import { useEffect, useState } from 'react'
 import IPokemon from '../../types/IPokemon'
 import Game from './Game/Game'
+import { fetchGamePokemons } from '../../features/gamePokemonSlice/gamePokemonSlice'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
+
 
 
 
 export default function GamePage() {
-    const [pokemons, setPokemons] = useState<IPokemon[]>([])
+
+    const { pokemons, dataLoading } = useAppSelector(state => state.game)
+    const dispatch = useAppDispatch()
 
 
     useEffect(() => {
-        const data: Promise<IPokemon>[] = []
-        for (let i = 0; i < 3; i++) {
-            data.push(fetchPokemon(getRandomNumber(1, 1000)))
-        }
-        Promise.all(data).then(pokemons => setPokemons([...pokemons]))
+        dispatch(fetchGamePokemons())
     }, [])
 
 
     return (
         <div className={styles.game}>
             {
-                pokemons.length && <Game pokemons={pokemons} />
+                pokemons.length === 3 && !dataLoading ? <Game pokemons={pokemons} /> : <h1>Loading...</h1>
             }
         </div>
     )

@@ -20,7 +20,5 @@ export default async function fetchPokemon(id: number): Promise<IPokemon> {
         name: pokemonData.name,
         img: pokemonImage,
     }
-    console.log(pokemon.id)
-    console.log(pokemon.img)
     return pokemon
 }
