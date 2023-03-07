@@ -2,15 +2,18 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import IPokemon from "../../types/IPokemon";
 import fetchPokemon from "../../functions/fetchPokemon";
 import getRandomNumber from "../../functions/getRandomNumber";
+import getHighScore from "../../functions/getHighScore";
 
 interface gamePokemonState {
     pokemons: IPokemon[],
-    dataLoading: boolean
+    dataLoading: boolean,
+    currentScore: number
 }
 
 const initialState: gamePokemonState = {
     pokemons: [],
-    dataLoading: false
+    dataLoading: false,
+    currentScore: 0
 }
 
 export const fetchGamePokemons = createAsyncThunk('game/fetchGamePokemons', async (name, thunkApi) => {
@@ -29,7 +32,15 @@ export const fetchGamePokemons = createAsyncThunk('game/fetchGamePokemons', asyn
 const gamePokemonSlice = createSlice({
     name: "game",
     reducers: {
-
+        incrementScore: (state) => {
+            state.currentScore += 1
+        },
+        endGame: (state) => {
+            if (getHighScore() < state.currentScore) {
+                localStorage.setItem("highScore", JSON.stringify(state.currentScore))
+            }
+            state.currentScore = 0
+        }
     },
     initialState,
     extraReducers: (builder) => {
@@ -47,3 +58,4 @@ const gamePokemonSlice = createSlice({
 })
 
 export default gamePokemonSlice.reducer
+export const { incrementScore, endGame } = gamePokemonSlice.actions

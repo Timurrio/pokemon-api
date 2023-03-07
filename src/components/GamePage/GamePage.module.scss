@@ -4,19 +4,11 @@
     background-color: aquamarine;
     font-size: 30px;
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
 }
 
-.pokemon_item {
-    h1 {
-        text-align: center;
-    }
-
-    max-width: 30%;
-
-    img {
-        max-width: 300px;
-        min-width: 300px;
-    }
+.loading {
+    width: 500px;
+    height: 730px;
 }

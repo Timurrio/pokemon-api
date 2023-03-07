@@ -1,18 +1,15 @@
 import styles from './GamePage.module.scss'
-import fetchPokemon from '../../functions/fetchPokemon'
-import getRandomNumber from '../../functions/getRandomNumber'
 import { useEffect, useState } from 'react'
-import IPokemon from '../../types/IPokemon'
 import Game from './Game/Game'
 import { fetchGamePokemons } from '../../features/gamePokemonSlice/gamePokemonSlice'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
+import getHighScore from '../../functions/getHighScore'
 
 
 
 
 export default function GamePage() {
-
-    const { pokemons, dataLoading } = useAppSelector(state => state.game)
+    const { pokemons, dataLoading, currentScore } = useAppSelector(state => state.game)
     const dispatch = useAppDispatch()
 
 
@@ -24,8 +21,10 @@ export default function GamePage() {
     return (
         <div className={styles.game}>
             {
-                pokemons.length === 3 && !dataLoading ? <Game pokemons={pokemons} /> : <h1>Loading...</h1>
+                pokemons.length === 3 && !dataLoading ? <Game pokemons={pokemons} /> : <div className={styles.loading}><h1>Loading...</h1></div>
             }
+            <h1>Current score: {currentScore}</h1>
+            <h1>Highscore: {getHighScore()}</h1>
         </div>
     )
 
