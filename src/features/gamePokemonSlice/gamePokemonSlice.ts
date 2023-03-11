@@ -7,12 +7,14 @@ import getHighScore from "../../functions/getHighScore";
 interface gamePokemonState {
     pokemons: IPokemon[],
     dataLoading: boolean,
-    currentScore: number
+    currentScore: number,
+    isGameStarted: boolean
 }
 
 const initialState: gamePokemonState = {
     pokemons: [],
     dataLoading: false,
+    isGameStarted: false,
     currentScore: 0
 }
 
@@ -39,7 +41,11 @@ const gamePokemonSlice = createSlice({
             if (getHighScore() < state.currentScore) {
                 localStorage.setItem("highScore", JSON.stringify(state.currentScore))
             }
+            state.isGameStarted = false
             state.currentScore = 0
+        },
+        startGame: (state) => {
+            state.isGameStarted = true
         }
     },
     initialState,
@@ -58,4 +64,4 @@ const gamePokemonSlice = createSlice({
 })
 
 export default gamePokemonSlice.reducer
-export const { incrementScore, endGame } = gamePokemonSlice.actions
+export const { incrementScore, endGame, startGame } = gamePokemonSlice.actions
