@@ -1,8 +1,9 @@
 import IPokemon from "../../../types/IPokemon"
 import getRandomNumber from "../../../functions/getRandomNumber"
 import styles from './Game.module.scss'
-import { useAppDispatch, useAppSelector } from "../../../app/hooks"
+import { useAppDispatch } from "../../../app/hooks"
 import { endGame, fetchGamePokemons, incrementScore } from "../../../features/gamePokemonSlice/gamePokemonSlice"
+import GameButton from "../GameButton/GameButton"
 
 interface GameProps {
     pokemons: IPokemon[]
@@ -25,7 +26,7 @@ export default function Game({ pokemons }: GameProps) {
             <div className={styles.buttons_block}>
                 {
                     pokemons.map((pokemon) => (
-                        <button key={pokemon.id} onClick={e => handleClick(e)}>{pokemon.name}</button>
+                        <GameButton key={pokemon.id} onClick={(e) => handleClick(e)}>{pokemon.name}</GameButton>
                     ))
                 }
             </div>
