@@ -1,13 +1,14 @@
 import getHighScore from "../../functions/getHighScore"
 import { useAppSelector } from "../../app/hooks"
+import styles from './Score.module.scss'
 
 export default function Score() {
     const currentScore = useAppSelector(state => state.game.currentScore)
 
     return (
-        <div>
-            <h1>Current score: {currentScore}</h1>
-            <h1>Highscore: {getHighScore()}</h1>
+        <div className={styles.container}>
+            <h2>Current score: {currentScore}</h2>
+            <h2>Highscore: {getHighScore()}</h2>
         </div>
     )
 }

@@ -1,27 +1,17 @@
 @import "../../styles/variables.scss";
 
+
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 5px;
     background-color: $dark-green;
-    color: $white;
-    border-radius: 15px;
+    border-radius: 30px;
     border: 3px solid $light-green;
     padding: 50px;
+    transition: all 0.3s;
 
-    button {
-        background-color: $black;
-        color: $white;
+    h2:hover {
+        color: $black;
     }
-}
-
-
-
-.header {}
-
-.paragraph {
-    margin: 50px 0;
 }

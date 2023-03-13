@@ -1,20 +1,43 @@
 @import "../../../styles/variables.scss";
 
 .button {
-    background-color: $dark-green;
-    color: $white;
+    background: $dark-green;
+    color: $light-green;
     padding: 5px;
     border-radius: 7px;
-    transition: 0.05s;
+    transition: all 0.3s;
     width: 30%;
     height: 4em;
-    border: none;
     font-size: large;
+    border: 3px solid rgba(0, 0, 0, 0);
 
     &:hover {
-        background-color: $light-green;
-        transition: 0.05s;
-        outline: 2px $white solid;
-
+        cursor: pointer;
+        border-radius: 20px;
+        transform: scale(1.15);
+        animation: 2s 0.1s buttonAnimation infinite;
     }
+}
+
+@keyframes buttonAnimation {
+    0% {
+        border: 3px solid $white;
+        color: $white;
+    }
+
+    33% {
+        border: 3px solid #98FB98;
+        color: #98FB98;
+    }
+
+    66% {
+        border: 3px solid $light-green;
+        color: $light-green;
+    }
+
+    100% {
+        border: 3px solid $white;
+        color: $white;
+    }
+
 }
