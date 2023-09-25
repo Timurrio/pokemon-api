@@ -2,14 +2,14 @@
 
 .button {
     background: $dark-green;
-    color: $light-green;
+    color: $white;
     padding: 5px;
     border-radius: 7px;
     transition: all 0.3s;
     width: 30%;
-    height: 4em;
-    font-size: large;
+    font-size: 3rem;
     border: 3px solid rgba(0, 0, 0, 0);
+    text-overflow: ellipsis;
 
     &:hover {
         cursor: pointer;

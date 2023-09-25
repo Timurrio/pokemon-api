@@ -7,8 +7,8 @@ export default function Score() {
 
     return (
         <div className={styles.container}>
-            <h2>Current score: {currentScore}</h2>
-            <h2>Highscore: {getHighScore()}</h2>
+            <h2 className={styles.score}>Current score: {currentScore}</h2>
+            <h2 className={styles.score}>Highscore: {getHighScore()}</h2>
         </div>
     )
 }

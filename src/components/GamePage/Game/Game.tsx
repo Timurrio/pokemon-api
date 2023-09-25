@@ -22,7 +22,7 @@ export default function Game({ pokemons }: GameProps) {
 
     return (
         <div className={styles.container}>
-            <img width={500} height={500} className={styles.pokemonImage} src={correctAnswer.img} alt={correctAnswer.name} />
+            <img className={styles.pokemonImage} src={correctAnswer.img} alt={correctAnswer.name} />
             <div className={styles.buttons_block}>
                 {
                     pokemons.map((pokemon) => (
