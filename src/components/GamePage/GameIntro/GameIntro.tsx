@@ -1,6 +1,6 @@
-import { useAppDispatch } from "../../app/hooks"
-import { startGame } from "../../features/gamePokemonSlice/gamePokemonSlice"
-import GameButton from "../GamePage/GameButton/GameButton"
+import { useAppDispatch } from "../../../app/hooks"
+import { startGame } from "../../../features/gamePokemonSlice/gamePokemonSlice"
+import GameButton from "../GameButton/GameButton"
 import styles from "./GameIntro.module.scss"
 
 

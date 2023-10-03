@@ -1,5 +1,5 @@
-import getHighScore from "../../functions/getHighScore"
-import { useAppSelector } from "../../app/hooks"
+import getHighScore from "../../../functions/getHighScore"
+import { useAppSelector } from "../../../app/hooks"
 import styles from './Score.module.scss'
 
 export default function Score() {
