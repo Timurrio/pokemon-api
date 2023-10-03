@@ -6,7 +6,7 @@
     padding: 5px;
     border-radius: 7px;
     transition: all 0.3s;
-    width: 30%;
+    width: 100%;
     font-size: 3rem;
     border: 3px solid rgba(0, 0, 0, 0);
     text-overflow: ellipsis;
@@ -18,6 +18,8 @@
         animation: 2s 0.1s buttonAnimation infinite;
     }
 }
+
+
 
 @keyframes buttonAnimation {
     0% {
@@ -39,5 +41,4 @@
         border: 3px solid $white;
         color: $white;
     }
-
 }
