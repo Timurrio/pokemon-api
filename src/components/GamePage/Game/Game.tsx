@@ -6,7 +6,7 @@ import { endGame, fetchGamePokemons, incrementScore } from "../../../features/ga
 import GameButton from "../GameButton/GameButton"
 
 interface GameProps {
-    pokemons: IPokemon[]
+    pokemons: Partial<IPokemon>[]
 }
 
 export default function Game({ pokemons }: GameProps) {

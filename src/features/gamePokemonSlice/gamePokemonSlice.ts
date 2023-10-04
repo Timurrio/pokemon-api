@@ -5,7 +5,7 @@ import getRandomNumber from "../../functions/getRandomNumber";
 import getHighScore from "../../functions/getHighScore";
 
 interface gamePokemonState {
-    pokemons: IPokemon[],
+    pokemons: Partial<IPokemon>[],
     dataLoading: boolean,
     currentScore: number,
     isGameStarted: boolean
@@ -20,7 +20,7 @@ const initialState: gamePokemonState = {
 
 export const fetchGamePokemons = createAsyncThunk('game/fetchGamePokemons', async (name, thunkApi) => {
     try {
-        const data: IPokemon[] = []
+        const data: Partial<IPokemon>[] = []
         for (let i = 0; i < 3; i++) {
             let pokemon = await fetchPokemon(getRandomNumber(1, 1000))
             data.push(pokemon)
