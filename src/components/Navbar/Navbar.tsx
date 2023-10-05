@@ -1,11 +1,16 @@
 import { Link } from "react-router-dom"
+import logo from "../../assets/green-pokedex-logo.png"
 import styles from "./Navbar.module.scss"
 
 const Navbar = () => {
     return (
         <nav className={styles.navbar}>
-            <Link to={"/"}><p>Pokedex</p></Link>
-            <Link to={"/game"}><p>Game</p></Link>
+            <img className={styles.logo} src={logo} alt="logo" />
+            <div className={styles["links-list"]}>
+                <Link className={styles.link} to={"/"}>Pokedex</Link>
+                <Link className={styles.link} to={"/game"}>Game</Link>
+            </div>
+
         </nav>
     )
 }
