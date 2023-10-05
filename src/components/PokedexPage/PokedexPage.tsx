@@ -1,25 +1,32 @@
 import IPokemon from "../../types/IPokemon"
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import styles from "./PokedexPage.module.scss"
 import fetchPokemon from "../../functions/fetchPokemon"
+import { useObserver } from "../../hooks/useIntersectionObserver"
 
 export const PokedexPage = () => {
     const [pokemons, setPokemons] = useState<Partial<IPokemon>[]>([])
     const [offset, setOffset] = useState(0)
-
-    const fetchData = useCallback(async (limit: number = 20) => {
+    const [isPokemonsLoading, setIsPokemonsLoading] = useState<boolean>(false)
+    const fetchData = useCallback(async (limit: number = 12) => {
         let arr: Partial<IPokemon>[] = []
+        setIsPokemonsLoading(true)
         for (let i = 1 + offset; i < 1 + limit + offset; i++) {
             let pokemon = await fetchPokemon(i)
             console.log(`${i}) offset is ${offset}`)
             arr.push(pokemon)
         }
-        setOffset(prev => prev + limit)
-        return arr
-    }, [offset])
+        setPokemons([...pokemons, ...arr])
+        setOffset(offset + limit)
+        setIsPokemonsLoading(false)
+    }, [pokemons, offset])
+    const observerRef = useRef<any>()
+    useObserver(observerRef, true, isPokemonsLoading, fetchData)
+
+
 
     useEffect(() => {
-        fetchData().then(data => setPokemons(data))
+        fetchData()
     }, [])
 
 
@@ -38,7 +45,8 @@ export const PokedexPage = () => {
                     ))
                 }
             </div>
-            <button onClick={() => fetchData().then(data => setPokemons(prev => [...prev, ...data]))}>Fetch more pokemons</button>
+            {/* <button  onClick={() => fetchData()}>Fetch more pokemons</button> */}
+            <div ref={observerRef} style={{ width: "100%", backgroundColor: "red" }}>Load more</div>
         </div>
     )
 }
