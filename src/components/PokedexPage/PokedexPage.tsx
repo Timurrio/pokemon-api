@@ -3,11 +3,13 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import styles from "./PokedexPage.module.scss"
 import fetchPokemon from "../../functions/fetchPokemon"
 import { useObserver } from "../../hooks/useIntersectionObserver"
+import PokemonCard from "../PokemonCard/PokemonCard"
 
 export const PokedexPage = () => {
     const [pokemons, setPokemons] = useState<Partial<IPokemon>[]>([])
     const [offset, setOffset] = useState(0)
     const [isPokemonsLoading, setIsPokemonsLoading] = useState<boolean>(false)
+
     const fetchData = useCallback(async (limit: number = 12) => {
         let arr: Partial<IPokemon>[] = []
         setIsPokemonsLoading(true)
@@ -20,6 +22,7 @@ export const PokedexPage = () => {
         setOffset(offset + limit)
         setIsPokemonsLoading(false)
     }, [pokemons, offset])
+
     const observerRef = useRef<any>()
     useObserver(observerRef, true, isPokemonsLoading, fetchData)
 
@@ -37,11 +40,7 @@ export const PokedexPage = () => {
             <div className={styles["cards-list"]}>
                 {
                     pokemons.map((pokemon) => (
-                        <div key={pokemon.id} className={styles.card}>
-                            <img src={pokemon.img} alt={pokemon.name} />
-                            <p>{pokemon.id}</p>
-                            <p>{pokemon.name}</p>
-                        </div>
+                        <PokemonCard pokemon={pokemon} />
                     ))
                 }
             </div>
