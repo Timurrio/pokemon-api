@@ -4,6 +4,7 @@ import styles from "./PokedexPage.module.scss"
 import fetchPokemon from "../../functions/fetchPokemon"
 import { useObserver } from "../../hooks/useIntersectionObserver"
 import PokemonCard from "../PokemonCard/PokemonCard"
+import { Search } from "../Search/Search"
 
 export const PokedexPage = () => {
     const [pokemons, setPokemons] = useState<Partial<IPokemon>[]>([])
@@ -26,17 +27,14 @@ export const PokedexPage = () => {
     const observerRef = useRef<any>()
     useObserver(observerRef, true, isPokemonsLoading, fetchData)
 
-
-
     useEffect(() => {
         fetchData()
     }, [])
 
-
-
-
     return (
         <div className={styles.container}>
+            <Search />
+
             <div className={styles["cards-list"]}>
                 {
                     pokemons.map((pokemon) => (
@@ -44,7 +42,7 @@ export const PokedexPage = () => {
                     ))
                 }
             </div>
-            {/* <button  onClick={() => fetchData()}>Fetch more pokemons</button> */}
+
             <div ref={observerRef} style={{ width: "100%", backgroundColor: "red" }}>Load more</div>
         </div>
     )
