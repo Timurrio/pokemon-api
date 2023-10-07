@@ -1,5 +1,5 @@
 
-enum Type {
+export enum Type {
     NORMAL = "normal",
     FIGHTING = "fighting",
     FLYING = "flying",

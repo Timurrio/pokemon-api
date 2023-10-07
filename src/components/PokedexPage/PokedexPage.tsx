@@ -16,7 +16,6 @@ export const PokedexPage = () => {
         setIsPokemonsLoading(true)
         for (let i = 1 + offset; i < 1 + limit + offset; i++) {
             let pokemon = await fetchPokemon(i)
-            console.log(`${i}) offset is ${offset}`)
             arr.push(pokemon)
         }
         setPokemons([...pokemons, ...arr])

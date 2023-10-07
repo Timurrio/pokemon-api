@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import gamePokemon from '../features/gamePokemonSlice/gamePokemonSlice'
+import pokedexFilterSlice from '../features/pokedexFilterSlice/pokedexFilterSlice';
 
 export const store = configureStore({
   reducer: {
-    game: gamePokemon
+    game: gamePokemon,
+    pokedex: pokedexFilterSlice
   },
 });
 
