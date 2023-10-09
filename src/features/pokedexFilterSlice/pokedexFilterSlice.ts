@@ -30,16 +30,15 @@ async function getGlobalNames(): Promise<string[]> {
 
 export const filterPokemonNames = createAsyncThunk.withTypes<{ state: RootState, dispatch: AppDispatch }>()("pokedex/filterPokemonNames", async (name, thunkApi) => {
     const state = thunkApi.getState().pokedex
+    console.log("Log from filterPokemonNames")
     try {
         if (state.types.length === 0) {
-
             let globalNames = await getGlobalNames()
             if (state.search === "") {
                 return globalNames
             } else {
                 return globalNames.filter((name) => name.includes(state.search.toLowerCase()))
             }
-
         } else {
             let nameArrays: string[][] = []
             for (let type of state.types) {
@@ -68,11 +67,16 @@ const pokedexFilterSlice = createSlice({
         },
         removeType: (state, action) => {
             state.types.filter(type => type !== action.payload)
+        },
+        setSearch: (state, action) => {
+            console.log("Log from setSearch")
+            state.search = action.payload
         }
     },
     extraReducers: (builder) => {
         builder.addCase(filterPokemonNames.fulfilled, (state, action) => {
             if (action.payload) {
+                console.log("filterPokemonNames fulfilled" + action.payload)
                 state.pokemonNames = action.payload
             }
         })
@@ -81,4 +85,4 @@ const pokedexFilterSlice = createSlice({
 })
 
 export default pokedexFilterSlice.reducer
-export const { addType, removeType } = pokedexFilterSlice.actions
+export const { addType, removeType, setSearch } = pokedexFilterSlice.actions
