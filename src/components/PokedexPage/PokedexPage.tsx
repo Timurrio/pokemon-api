@@ -5,23 +5,22 @@ import fetchPokemon from "../../functions/fetchPokemon"
 import { useObserver } from "../../hooks/useIntersectionObserver"
 import PokemonCard from "../PokemonCard/PokemonCard"
 import { Search } from "../Search/Search"
-import { filterPokemonNames } from "../../features/pokedexFilterSlice/pokedexFilterSlice"
-import { useAppDispatch, useAppSelector } from "../../app/hooks"
+import { useAppSelector } from "../../app/hooks"
+import { filterPokemonNames } from "../../functions/filterPokemonNames"
 
 
 export const PokedexPage = () => {
-    const dispatch = useAppDispatch()
-    const { types, search, pokemonNames } = useAppSelector(state => state.pokedex)
+    const { types, search } = useAppSelector(state => state.pokedex)
+    const [pokemonNames, setPokemonNames] = useState<string[]>([])
     const [pokemons, setPokemons] = useState<Partial<IPokemon>[]>([])
     const [offset, setOffset] = useState(0)
     const [isPokemonsLoading, setIsPokemonsLoading] = useState<boolean>(false)
+    const [isNamesLoading, setIsNamesLoading] = useState<boolean>(false)
 
 
     const fetchData = useCallback(async (lim: number = 12) => {
         let arr: Partial<IPokemon>[] = []
         let limit: number = pokemonNames.length >= pokemons.length + offset ? lim : pokemonNames.length - pokemons.length - 1
-        console.log(`Limit is: ${limit}  Pokemons: ${pokemons} and PokemonNames: ${pokemonNames}`)
-        console.log("fetching data from: " + pokemonNames)
         setIsPokemonsLoading(true)
         try {
             for (let i = offset; i < limit + offset; i++) {
@@ -36,34 +35,33 @@ export const PokedexPage = () => {
         setIsPokemonsLoading(false)
     }, [pokemons, offset, pokemonNames])
 
+    const fetchNames = useCallback(async () => {
+        setIsNamesLoading(true)
+        const names = await filterPokemonNames(search, types)
+        setPokemonNames(names)
+        setPokemons([])
+        setOffset(0)
+        setIsNamesLoading(false)
+    }, [search, types])
+
     useEffect(() => {
-        (async () => {
-            await dispatch(filterPokemonNames())
-            fetchData()
-        })()
+        console.log("Initial fetchnames")
+        fetchNames()
     }, [])
 
     useEffect(() => {
-        (async () => {
-            console.log("Trigger usEffect on search change")
-            setOffset(0)
-            setPokemons([])
-            console.log("Set offset 0 set Pokemons [] and fetch data")
-            console.log(`Pokemons after setting []: ${pokemons} And Offset is ${offset}`)
-            await dispatch(filterPokemonNames())
-            fetchData()
-        })()
-    }, [types, search])
+        console.log("Fetch data after pokemonNames change")
+        fetchData()
+    }, [pokemonNames])
 
+    useEffect(() => {
+        console.log("Fetch names on search/types change")
+        fetchNames()
+    }, [search, types])
 
-
-    // useEffect(() => {
-
-
-    // }, [pokemonNames])
 
     const observerRef = useRef<any>()
-    useObserver(observerRef, pokemons.length < pokemonNames.length, isPokemonsLoading, fetchData)
+    useObserver(observerRef, pokemons.length < pokemonNames.length, isPokemonsLoading || isNamesLoading, fetchData)
 
     return (
         <div className={styles.container}>
