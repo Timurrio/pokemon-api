@@ -62,9 +62,11 @@ const pokedexFilterSlice = createSlice({
             if (state.types.length < 2) {
                 state.types.push(action.payload)
             }
+            console.log(`addType ${action.payload}: ${state.types}`)
         },
         removeType: (state, action) => {
-            state.types.filter(type => type !== action.payload)
+            state.types = state.types.filter(type => type !== action.payload)
+            console.log(`removeType ${action.payload}: ${state.types}`)
         },
         setSearch: (state, action) => {
             state.search = action.payload

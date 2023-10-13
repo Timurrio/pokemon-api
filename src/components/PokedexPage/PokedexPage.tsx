@@ -7,6 +7,8 @@ import PokemonCard from "../PokemonCard/PokemonCard"
 import { Search } from "../Search/Search"
 import { useAppSelector } from "../../app/hooks"
 import { filterPokemonNames } from "../../functions/filterPokemonNames"
+import TypeButton from "../TypeButton/TypeButton"
+import { Type } from "../../types/PokemonType"
 
 
 export const PokedexPage = () => {
@@ -38,6 +40,7 @@ export const PokedexPage = () => {
     const fetchNames = useCallback(async () => {
         setIsNamesLoading(true)
         const names = await filterPokemonNames(search, types)
+        console.log("names: " + names)
         setPokemonNames(names)
         setPokemons([])
         setOffset(0)
@@ -66,6 +69,10 @@ export const PokedexPage = () => {
     return (
         <div className={styles.container}>
             <Search />
+            <TypeButton type={Type.ELECTRIC} />
+            <TypeButton type={Type.BUG} />
+            <TypeButton type={Type.FIGHTING} />
+
 
             <div className={styles["cards-list"]}>
                 {

@@ -22,10 +22,16 @@ export const filterPokemonNames = async (search: string, types: PokemonType[]) =
             }
         } else {
             let nameArrays: string[][] = []
-            for (let type of types) {
-                let rawData: any = await fetch(`https://pokeapi.co/api/v2/type/${type}`).then(res => res.json()).then(data => data.pokemon)
-                nameArrays.push(rawData)
+            for (let i = 0; i < types.length; i++) {
+                console.log("Iteration number " + i)
+                nameArrays[i] = []
+                let rawData: any = await fetch(`https://pokeapi.co/api/v2/type/${types[i]}`).then(res => res.json()).then(data => data.pokemon)
+                for (let elem of rawData) {
+                    nameArrays[i].push(elem.pokemon.name)
+                }
             }
+            console.log(nameArrays)
+
             let pokemonNames = types.length === 1 ? nameArrays[0] : nameArrays[0].filter(name => nameArrays[1].includes(name))
             if (search === "") {
                 return pokemonNames
