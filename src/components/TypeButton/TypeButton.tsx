@@ -12,7 +12,7 @@ const TypeButton: React.FC<{ type: Type }> = ({ type }) => {
   function handleClick() {
     console.log(`Dispatched on handleclick type ${type}`)
     if (isActive) {
-      dispatch(removeType({ payload: type }))
+      dispatch(removeType(type))
     } else {
       dispatch(addType(type))
     }
