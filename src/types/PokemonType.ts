@@ -17,9 +17,7 @@ export enum Type {
     ICE = "ice",
     DRAGON = "dragon",
     DARK = "dark",
-    FAIRY = "fairy",
-    UNKNOWN = "unknown",
-    SHADOW = "shadow"
+    FAIRY = "fairy"
 }
 
 type PokemonType = {

@@ -9,6 +9,7 @@ import { useAppSelector } from "../../app/hooks"
 import { filterPokemonNames } from "../../functions/filterPokemonNames"
 import TypeButton from "../TypeButton/TypeButton"
 import { Type } from "../../types/PokemonType"
+import TypeButtonList from "../TypeButtonList/TypeButtonList"
 
 
 export const PokedexPage = () => {
@@ -69,9 +70,7 @@ export const PokedexPage = () => {
     return (
         <div className={styles.container}>
             <Search />
-            <TypeButton type={Type.ELECTRIC} />
-            <TypeButton type={Type.BUG} />
-            <TypeButton type={Type.FIGHTING} />
+            <TypeButtonList/>
 
 
             <div className={styles["cards-list"]}>
