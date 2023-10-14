@@ -3,13 +3,13 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import styles from "./PokedexPage.module.scss"
 import fetchPokemon from "../../functions/fetchPokemon"
 import { useObserver } from "../../hooks/useIntersectionObserver"
-import PokemonCard from "../PokemonCard/PokemonCard"
-import { Search } from "../Search/Search"
+import PokemonCard from "./PokemonCard/PokemonCard"
+import { Search } from "./Search/Search"
 import { useAppSelector } from "../../app/hooks"
 import { filterPokemonNames } from "../../functions/filterPokemonNames"
-import TypeButton from "../TypeButton/TypeButton"
+import TypeButton from "./TypeButtonList/TypeButton/TypeButton"
 import { Type } from "../../types/PokemonType"
-import TypeButtonList from "../TypeButtonList/TypeButtonList"
+import TypeButtonList from "./TypeButtonList/TypeButtonList"
 
 
 export const PokedexPage = () => {
@@ -70,7 +70,7 @@ export const PokedexPage = () => {
     return (
         <div className={styles.container}>
             <Search />
-            <TypeButtonList/>
+            <TypeButtonList />
 
 
             <div className={styles["cards-list"]}>

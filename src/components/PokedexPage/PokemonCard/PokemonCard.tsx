@@ -1,6 +1,6 @@
-import IPokemon from "../../types/IPokemon"
+import IPokemon from "../../../types/IPokemon"
 import styles from "./PokemonCard.module.scss"
-import "../../styles/types.scss"
+import "../../../styles/types.scss"
 
 
 

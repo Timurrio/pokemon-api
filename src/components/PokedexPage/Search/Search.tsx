@@ -1,7 +1,7 @@
-import debounce from "../../functions/debounce"
+import debounce from "../../../functions/debounce"
 import styles from "./Search.module.scss"
-import { useAppDispatch } from "../../app/hooks"
-import { setSearch } from "../../features/pokedexFilterSlice/pokedexFilterSlice"
+import { useAppDispatch } from "../../../app/hooks"
+import { setSearch } from "../../../features/pokedexFilterSlice/pokedexFilterSlice"
 
 export const Search = () => {
     const dispatch = useAppDispatch()

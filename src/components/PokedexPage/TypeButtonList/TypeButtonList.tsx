@@ -1,5 +1,5 @@
-import TypeButton from "../TypeButton/TypeButton"
-import { Type } from "../../types/PokemonType"
+import TypeButton from "./TypeButton/TypeButton"
+import { Type } from "../../../types/PokemonType"
 
 const TypeButtonList = () => {
     return (

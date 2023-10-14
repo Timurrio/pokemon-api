@@ -1,9 +1,9 @@
-import { Type } from "../../types/PokemonType"
+import { Type } from "../../../../types/PokemonType"
 import styles from "./TypeButton.module.scss"
-import "../../styles/types.scss"
-import { useAppDispatch } from "../../app/hooks"
+import "../../../../styles/types.scss"
+import { useAppDispatch } from "../../../../app/hooks"
 import { useState } from "react"
-import { addType, removeType } from "../../features/pokedexFilterSlice/pokedexFilterSlice"
+import { addType, removeType } from "../../../../features/pokedexFilterSlice/pokedexFilterSlice"
 
 
 const TypeButton: React.FC<{ type: Type }> = ({ type }) => {
