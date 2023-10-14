@@ -1,5 +1,6 @@
 import { Type } from "../../types/PokemonType"
 import styles from "./TypeButton.module.scss"
+import "../../styles/types.scss"
 import { useAppDispatch } from "../../app/hooks"
 import { useState } from "react"
 import { addType, removeType } from "../../features/pokedexFilterSlice/pokedexFilterSlice"
@@ -20,7 +21,7 @@ const TypeButton: React.FC<{ type: Type }> = ({ type }) => {
   }
 
   return (
-    <button onClick={() => handleClick()}>{type.charAt(0).toUpperCase() + type.slice(1)}</button>
+    <button className={`${type}`} onClick={() => handleClick()}>{type.charAt(0).toUpperCase() + type.slice(1)}</button>
   )
 }
 

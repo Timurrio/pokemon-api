@@ -1,5 +1,6 @@
 import IPokemon from "../../types/IPokemon"
 import styles from "./PokemonCard.module.scss"
+import "../../styles/types.scss"
 
 
 
@@ -12,7 +13,7 @@ const PokemonCard: React.FC<{ pokemon: Partial<IPokemon> }> = ({ pokemon }) => {
             <div className={styles.types}>
                 {
                     pokemon.types && pokemon.types.map((type) => (
-                        <span>{type.type.name}</span>
+                        <span className={`${type.type.name}`} key={type.slot}>{type.type.name}</span>
                     ))
                 }
             </div>
