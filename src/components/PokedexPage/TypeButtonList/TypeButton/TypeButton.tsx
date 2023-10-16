@@ -11,7 +11,6 @@ const TypeButton: React.FC<{ type: Type }> = ({ type }) => {
   const [isActive, setIsActive] = useState<boolean>(false)
 
   function handleClick() {
-    console.log(`Dispatched on handleclick type ${type}`)
     if (isActive) {
       dispatch(removeType(type))
     } else {
@@ -21,7 +20,7 @@ const TypeButton: React.FC<{ type: Type }> = ({ type }) => {
   }
 
   return (
-    <button className={`${type}`} onClick={() => handleClick()}>{type.charAt(0).toUpperCase() + type.slice(1)}</button>
+    <button className={`${type} ${styles.button} ${isActive ? styles.active : ""}`} onClick={() => handleClick()}>{type.charAt(0).toUpperCase() + type.slice(1)}</button>
   )
 }
 

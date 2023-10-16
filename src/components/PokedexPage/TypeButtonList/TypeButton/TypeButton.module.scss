@@ -1,0 +1,15 @@
+.button {
+    padding: 5px;
+    font-size: 14px;
+    width: 80px;
+    border: 4px rgba(#000000, 0) solid;
+    cursor:  pointer;
+
+    &:hover {
+    border: 4px #008000 solid;
+    }
+}
+
+.active {
+    border: 4px #008000 solid;
+}
