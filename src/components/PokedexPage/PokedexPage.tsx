@@ -7,6 +7,7 @@ import PokemonCard from "./PokemonCard/PokemonCard"
 import { Search } from "./Search/Search"
 import { useAppSelector } from "../../app/hooks"
 import { filterPokemonNames } from "../../functions/filterPokemonNames"
+import loader from "../../assets/pokeballLoader.gif"
 import TypeButton from "./TypeButtonList/TypeButton/TypeButton"
 import { Type } from "../../types/PokemonType"
 import TypeButtonList from "./TypeButtonList/TypeButtonList"
@@ -81,7 +82,10 @@ export const PokedexPage = () => {
                 }
             </div>
 
-            <div ref={observerRef} style={{ width: "100%", backgroundColor: "red" }}>Load more</div>
+            <div ref={observerRef} className={styles["loader"]}>
+                <img src={loader} width={100} height={100} className={styles["loader-image"]} alt="loader" />
+
+            </div>
         </div>
     )
 }
