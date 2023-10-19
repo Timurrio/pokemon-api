@@ -26,6 +26,7 @@ export default interface IPokemon {
     weight: number,
     types: PokemonType[],
     stats: Stat[],
-    abilities: Ability[]
+    abilities: Ability[],
+    sprites: string[]
 }
 

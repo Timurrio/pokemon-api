@@ -4,6 +4,23 @@ import { useParams } from "react-router-dom"
 import IPokemon from "../../types/IPokemon"
 import getPokemonImage from "../../functions/getPokemonImage"
 
+function extractSprites(obj: any): string[] {
+    delete obj["versions"]
+    const result: string[] = [];
+
+    for (const key in obj) {
+        if (obj[key] === null) {
+            continue;
+        } else if (typeof obj[key] === 'string') {
+            result.push(obj[key]);
+        } else if (typeof obj[key] === 'object') {
+            result.push(...extractSprites(obj[key]));
+        }
+    }
+
+    return result;
+}
+
 export const PokemonPage = () => {
     const { id } = useParams()
     const [pokemon, setPokemon] = useState<IPokemon>()
@@ -20,7 +37,8 @@ export const PokemonPage = () => {
                 img: getPokemonImage(pokemonData),
                 types: pokemonData.types,
                 abilities: pokemonData.abilities,
-                stats: pokemonData.stats
+                stats: pokemonData.stats,
+                sprites: extractSprites(pokemonData.sprites)
             })
         })()
     }, [])
