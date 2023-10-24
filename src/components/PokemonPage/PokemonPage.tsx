@@ -49,7 +49,7 @@ export const PokemonPage = () => {
         return (
             <div className={styles.page}>
                 <div className={styles.content}>
-                    <h1 className={styles.pokemon_name}>{pokemon.name}</h1>
+                    <h1 className={styles.pokemon_name}>{pokemon.name} <span className={styles.pokemon_id}>{pokemon.id}</span></h1>
 
                     <div className={styles.main}>
                         <div className={styles.main_left}>
@@ -57,17 +57,41 @@ export const PokemonPage = () => {
 
                         </div>
                         <div className={styles.main_right}>
-                            <h2>Height</h2>
-                            <p>{pokemon.height}</p>
-                            <h2>Weight</h2>
-                            <p>{pokemon.weight}</p>
-                            <div className={styles.types}>
-                                {
-                                    pokemon.types.map((type) => (
-                                        <span className={type.type.name}>{type.type.name}</span>
-                                    ))
-                                }
-                            </div>
+
+                            <table className={styles.info_table}>
+                                <tr>
+                                    <th><h2>Height</h2></th>
+                                    <th><p>{pokemon.height}</p></th>
+                                </tr>
+                                <tr>
+                                    <th><h2>Weight</h2></th>
+                                    <th><p>{pokemon.weight}</p></th>
+                                </tr>
+                                <tr>
+                                    <th><h2>Types</h2></th>
+                                    <th>
+                                        <div className={styles.types}>
+                                            {
+                                                pokemon.types.map((type) => (
+                                                    <span className={styles.pill + " " + type.type.name}>{type.type.name}</span>
+                                                ))
+                                            }
+                                        </div>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th><h2>Abilities</h2></th>
+                                    <th>
+                                        <div className={styles.abilities}>
+                                            {
+                                                pokemon.abilities.map((ability) => (
+                                                    <span>{ability.ability.name}</span>
+                                                ))
+                                            }
+                                        </div></th>
+                                </tr>
+                            </table>
+
                         </div>
                     </div>
 
@@ -75,25 +99,21 @@ export const PokemonPage = () => {
                         <h2>Stats</h2>
                         {
                             pokemon.stats.map((stat) => (
-                                <div>Base {stat.stat.name}: {stat.base_stat}</div>
+                                <div>
+                                    <p>Base {stat.stat.name}: {stat.base_stat}</p>
+
+                                </div>
                             ))
                         }
                     </div>
 
-                    <div className={styles.abilities}>
-                        <h2>Abilities</h2>
-                        {
-                            pokemon.abilities.map((ability) => (
-                                <span>{ability.ability.name}</span>
-                            ))
-                        }
-                    </div>
+
 
                     <div className={styles.sprites}>
                         <h2>Sprites</h2>
                         {
                             pokemon.sprites.map((sprite) => (
-                                <img src={sprite} alt={sprite} />
+                                <img height={100} width={100} src={sprite} alt={sprite} />
                             ))
                         }
                     </div>
