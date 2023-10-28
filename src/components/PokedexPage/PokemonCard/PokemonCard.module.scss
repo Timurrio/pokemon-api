@@ -23,7 +23,13 @@
     background-color: $black;
     color: $white;
     transition: all 0.25s;
-    padding: 10px;
+    padding: 7px;
+}
+
+.pokemon_types {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
 }
 
 .pokemon_id {
@@ -35,7 +41,7 @@
 }
 
 .pokemon_types {
-    padding: 7px 0px;
+    padding: 5px 0px;
 }
 
 .image_container {
@@ -63,6 +69,12 @@
     padding: 5px 10px;
     width: 100px;
     border-radius: 10px;
+}
+
+@media screen and (max-width: 1000px) {
+    .pill {
+        width: 75px;
+    }
 }
 
 @keyframes card-appear {
