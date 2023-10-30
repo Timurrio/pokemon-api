@@ -1,15 +1,22 @@
+@import "../../../../styles/variables.scss";
+
+
 .button {
     padding: 5px;
     font-size: 14px;
     width: 80px;
     border: 4px rgba(#000000, 0) solid;
-    cursor:  pointer;
+    cursor: pointer;
+    transition: all 0.3s;
 
     &:hover {
-    border: 4px #008000 solid;
+        box-shadow: 0px 0px 7px 2px $light-green;
+        transform: scale(1.10);
     }
 }
 
 .active {
-    border: 4px #008000 solid;
+    box-shadow: 0px 0px 7px 2px $light-green;
+    transform: scale(1.10);
+
 }

@@ -5,5 +5,11 @@
     max-width: 1200px;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 10px;
+    gap: 20px;
+}
+
+@media screen and (max-width: 550px) {
+    .list {
+        gap: 15px;
+    }
 }
