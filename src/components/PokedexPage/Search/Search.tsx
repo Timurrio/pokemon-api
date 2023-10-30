@@ -8,7 +8,7 @@ export const Search = () => {
 
     return (
         <div className={styles.container}>
-            <input placeholder="Search by name" type="text" onChange={debounce((e) => dispatch(setSearch(e.target.value)), 300)} />
+            <input className={styles.input} placeholder="Search by name" type="text" onChange={debounce((e) => dispatch(setSearch(e.target.value)), 300)} />
         </div>
     )
 }
