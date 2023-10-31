@@ -1,3 +1,5 @@
+@import "../../styles/variables.scss";
+
 .container {
     display: flex;
     flex-direction: column;
@@ -20,6 +22,20 @@
     display: flex;
     justify-content: center;
     width: 100%;
+}
+
+.pikachu-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    color: $black;
+    font-size: 24px;
+}
+
+.pikachu-image {
+    width: 200px;
+    height: 100px;
 }
 
 .loader-image {

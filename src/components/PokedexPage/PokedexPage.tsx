@@ -1,5 +1,5 @@
 import IPokemon from "../../types/IPokemon"
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import styles from "./PokedexPage.module.scss"
 import fetchPokemon from "../../functions/fetchPokemon"
 import { useObserver } from "../../hooks/useIntersectionObserver"
@@ -8,8 +8,7 @@ import { Search } from "./Search/Search"
 import { useAppSelector } from "../../app/hooks"
 import { filterPokemonNames } from "../../functions/filterPokemonNames"
 import loader from "../../assets/pokeballLoader.gif"
-import TypeButton from "./TypeButtonList/TypeButton/TypeButton"
-import { Type } from "../../types/PokemonType"
+import pikachuSleeping from "../../assets/pikachu-sleeping.png"
 import TypeButtonList from "./TypeButtonList/TypeButtonList"
 
 
@@ -20,6 +19,7 @@ export const PokedexPage = () => {
     const [offset, setOffset] = useState(0)
     const [isPokemonsLoading, setIsPokemonsLoading] = useState<boolean>(false)
     const [isNamesLoading, setIsNamesLoading] = useState<boolean>(false)
+    const isLoaderActive = useMemo(() => pokemons.length < pokemonNames.length - 1, [pokemons, pokemonNames])
 
 
     const fetchData = useCallback(async (lim: number = 12) => {
@@ -83,9 +83,18 @@ export const PokedexPage = () => {
             </div>
 
             <div ref={observerRef} className={styles["loader"]}>
-                <img src={loader} width={100} height={100} className={styles["loader-image"]} alt="loader" />
-
+                {
+                    isLoaderActive
+                        ?
+                        <img src={loader} width={100} height={100} className={styles["loader-image"]} alt="loader" />
+                        :
+                        <div className={styles["pikachu-container"]}>
+                            <img src={pikachuSleeping} width={200} height={100} className={styles["pikachu-image"]} alt="loader" />
+                            That`s all!
+                        </div>
+                }
             </div>
+
         </div>
     )
 }
