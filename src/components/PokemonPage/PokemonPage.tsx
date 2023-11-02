@@ -95,16 +95,25 @@ export const PokemonPage = () => {
                         </div>
                     </div>
 
+
+
+
                     <div className={styles.stats}>
                         <h2>Stats</h2>
-                        {
-                            pokemon.stats.map((stat) => (
-                                <div>
-                                    <p>Base {stat.stat.name}: {stat.base_stat}</p>
-
-                                </div>
-                            ))
-                        }
+                        <table className={styles["stats-table"]}>
+                            {
+                                pokemon.stats.map((stat) => (
+                                    <tr>
+                                        <th className={styles["stat-header"]}>Base {stat.stat.name} </th>
+                                        <td className={styles["stat-bar-container"]}>
+                                            <div style={{ width: `${stat.base_stat}%` }} className={styles["stat-bar"]}>
+                                                {stat.base_stat}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))
+                            }
+                        </table>
                     </div>
 
 

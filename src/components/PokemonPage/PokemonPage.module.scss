@@ -54,6 +54,39 @@
     border-radius: 10px;
 }
 
+.stats {
+    width: 100%;
+}
+
+.stat-header {
+    width: 25%;
+    min-width: 150px;
+    color: $white;
+    font-size: 20px;
+}
+
+.stats-table {
+    background-color: $black;
+    width: 100%;
+    border-spacing: 0 15px;
+}
+
+
+.stat-bar-container {
+    width: 100%;
+}
+
+.stat-bar {
+    // background-color: $white;
+    background-image: linear-gradient(90deg, $light-green, $white);
+    color: $black;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    min-width: 50px;
+    padding: 5px;
+    border-radius: 10px;
+}
 
 
 .main_right {
@@ -62,6 +95,8 @@
     margin-left: auto;
     margin-right: 50px;
 }
+
+
 
 .sprites {
     display: flex;
