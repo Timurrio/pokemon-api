@@ -5,6 +5,7 @@ import IPokemon from "../../types/IPokemon"
 import getPokemonImage from "../../functions/getPokemonImage"
 import loader from "../../assets/pokeballLoader.gif"
 import "../../styles/types.scss"
+import { SpriteGallery } from "./SpriteGallery/SpriteGallery"
 
 function extractSprites(obj: any): string[] {
     delete obj["versions"]
@@ -120,11 +121,7 @@ export const PokemonPage = () => {
 
                     <div className={styles.sprites}>
                         <h2>Sprites</h2>
-                        {
-                            pokemon.sprites.map((sprite) => (
-                                <img height={100} width={100} src={sprite} alt={sprite} />
-                            ))
-                        }
+                        <SpriteGallery sprites={pokemon.sprites} />
                     </div>
 
 

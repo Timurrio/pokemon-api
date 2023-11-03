@@ -1,0 +1,82 @@
+@import "../../../styles/variables.scss";
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 50px 0px;
+    user-select: none;
+}
+
+.slides {
+    display: flex;
+    gap: 5px;
+    padding: 5px;
+}
+
+.slide {
+    background-color: $black;
+    border: 4px solid $black;
+
+    &:hover {
+        border-color: $light-green;
+    }
+}
+
+.slide--active {
+    border-color: $light-green;
+}
+
+.slide_number {
+    position: absolute;
+    z-index: 5;
+    color: $white;
+    font-size: 20px;
+    padding: 5px;
+    align-self: flex-start;
+}
+
+.image_container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    max-width: 500px;
+    max-height: 500px;
+    background-color: $black;
+}
+
+.active_image {
+    aspect-ratio: 1/1;
+    width: 90%;
+    padding: 20px;
+}
+
+%arrow-icon {
+    position: absolute;
+    z-index: 5;
+    color: $dark-green;
+    background-color: $white;
+    border-radius: 10px;
+    top: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+
+    &:hover {
+        color: $light-green;
+    }
+}
+
+.arrow_left {
+    @extend %arrow-icon;
+    left: -25px;
+}
+
+.arrow_right {
+    @extend %arrow-icon;
+    right: -25px;
+}
