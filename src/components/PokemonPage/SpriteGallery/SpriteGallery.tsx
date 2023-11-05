@@ -43,7 +43,7 @@ export const SpriteGallery = ({ sprites }: { sprites: string[] }) => {
             <div className={styles.slides}>
                 {
                     sprites.map((sprite, index) => (
-                        displayedSlides.includes(sprite) && <img onClick={() => { setActiveSlide(index) }} className={`${styles.slide} ${activeSlide === index ? styles["slide--active"] : ""}`} height={100} width={100} src={sprite} alt={sprite} />
+                        displayedSlides.includes(sprite) && <img key={index} onClick={() => { setActiveSlide(index) }} className={`${styles.slide} ${activeSlide === index ? styles["slide--active"] : ""}`} height={100} width={100} src={sprite} alt={sprite} />
                     ))
                 }
             </div>
