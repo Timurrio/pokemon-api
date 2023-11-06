@@ -84,6 +84,7 @@
     font-size: 20px;
     text-align: center;
     min-width: 50px;
+    max-width: 99%;
     padding: 5px;
     border-radius: 10px;
 }
@@ -94,4 +95,13 @@
     align-items: center;
     margin-left: auto;
     margin-right: 50px;
+}
+
+@media screen and (max-width: 600px) {
+    .stat-header {
+        width: 15%;
+        font-size: 16px;
+        padding: 5px;
+    }
+
 }
