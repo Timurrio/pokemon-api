@@ -1,72 +1,81 @@
 import IPokemon from "../../types/IPokemon"
-import { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { useEffect, useMemo, useRef } from "react"
 import styles from "./PokedexPage.module.scss"
 import fetchPokemon from "../../functions/fetchPokemon"
 import { useObserver } from "../../hooks/useIntersectionObserver"
 import PokemonCard from "./PokemonCard/PokemonCard"
 import { Search } from "./Search/Search"
-import { useAppSelector } from "../../app/hooks"
+import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import { filterPokemonNames } from "../../functions/filterPokemonNames"
 import loader from "../../assets/pokeballLoader.gif"
 import pikachuSleeping from "../../assets/pikachu-sleeping.png"
 import TypeButtonList from "./TypeButtonList/TypeButtonList"
+import { InfiniteData, QueryKey, useInfiniteQuery, useQuery } from "@tanstack/react-query"
+import { resetPokedexFilters } from "../../features/pokedexFilterSlice/pokedexFilterSlice"
 
 
 export const PokedexPage = () => {
+    const dispatch = useAppDispatch()
     const { types, search } = useAppSelector(state => state.pokedex)
-    const [pokemonNames, setPokemonNames] = useState<string[]>([])
-    const [pokemons, setPokemons] = useState<Partial<IPokemon>[]>([])
-    const [offset, setOffset] = useState(0)
-    const [isPokemonsLoading, setIsPokemonsLoading] = useState<boolean>(false)
-    const [isNamesLoading, setIsNamesLoading] = useState<boolean>(false)
-    const isLoaderActive = useMemo(() => pokemons.length < pokemonNames.length - 1, [pokemons, pokemonNames])
 
-
-    const fetchData = useCallback(async (lim: number = 12) => {
-        let arr: Partial<IPokemon>[] = []
-        let limit: number = pokemonNames.length >= pokemons.length + offset ? lim : pokemonNames.length - pokemons.length - 1
-        setIsPokemonsLoading(true)
-        try {
-            for (let i = offset; i < limit + offset; i++) {
-                let pokemon = await fetchPokemon(pokemonNames[i])
-                arr.push(pokemon)
+    const { data: pokemonNames,
+        isFetching: isNamesFetching,
+        refetch: refetchNames, } = useQuery({
+            queryKey: ["pokemonNames"],
+            initialData: [],
+            queryFn: async () => {
+                console.log("pokemonNames query")
+                const names = await filterPokemonNames(search, types)
+                console.log(names)
+                return names
             }
-        } catch (e) {
-            console.log("fetchData error" + e)
-        }
-        setPokemons([...pokemons, ...arr])
-        setOffset(offset + limit)
-        setIsPokemonsLoading(false)
-    }, [pokemons, offset, pokemonNames])
+        })
 
-    const fetchNames = useCallback(async () => {
-        setIsNamesLoading(true)
-        const names = await filterPokemonNames(search, types)
-        console.log("names: " + names)
-        setPokemonNames(names)
-        setPokemons([])
-        setOffset(0)
-        setIsNamesLoading(false)
-    }, [search, types])
+    const { data: pokemons, fetchNextPage, isFetching: isPokemonsFetching, isFetchingNextPage } = useInfiniteQuery<Partial<IPokemon>[], Error, InfiniteData<Partial<IPokemon>[]>, QueryKey, number>({
+        queryKey: ["pokemons", pokemonNames],
+        initialPageParam: 0,
+        getNextPageParam: (lastPage, pages, lastPageParam) => { return lastPageParam + 12 },
+        queryFn: async ({ pageParam = 0 }): Promise<Partial<IPokemon>[]> => {
+            console.log("pokemons query")
+            let arr: Partial<IPokemon>[] = []
+            let limit: number = pokemonNames.length >= (Array.isArray(pokemons) ? pokemons.length : 0) + pageParam ? 12 : pokemonNames.length - (Array.isArray(pokemons) ? pokemons.length : 0) - 1
+
+            try {
+                for (let i = pageParam; i < limit + pageParam; i++) {
+                    let pokemon = await fetchPokemon(pokemonNames[i])
+                    arr.push(pokemon)
+                }
+            } catch (e) {
+                console.log("fetchData error" + e)
+            } finally {
+                return arr
+            }
+        }
+    })
 
     useEffect(() => {
-        console.log("Initial fetchnames")
-        fetchNames()
+        dispatch(resetPokedexFilters())
     }, [])
 
     useEffect(() => {
-        console.log("Fetch data after pokemonNames change")
-        fetchData()
-    }, [pokemonNames])
-
-    useEffect(() => {
-        console.log("Fetch names on search/types change")
-        fetchNames()
+        refetchNames()
     }, [search, types])
 
+    const pokemonsLength = useMemo(() => {
+        if (pokemons) {
+            return pokemons.pages.reduce((acc, curr) => (
+                acc += curr.length
+            ), 0)
+        }
+        else {
+            return 0
+        }
+    }, [pokemons])
+
+    const isLoaderActive = useMemo(() => pokemonsLength < pokemonNames.length - 1, [pokemonsLength, pokemonNames])
 
     const observerRef = useRef<any>()
-    useObserver(observerRef, pokemons.length < pokemonNames.length, isPokemonsLoading || isNamesLoading, fetchData)
+    useObserver(observerRef, pokemonsLength < pokemonNames.length - 1, isFetchingNextPage || isPokemonsFetching || isNamesFetching, () => fetchNextPage())
 
     return (
         <div className={styles.container}>
@@ -76,8 +85,12 @@ export const PokedexPage = () => {
 
             <div className={styles["cards-list"]}>
                 {
-                    pokemons.map((pokemon) => (
-                        <PokemonCard key={pokemon.id} pokemon={pokemon} />
+                    pokemons && pokemons.pages.map((page) => (
+                        <>
+                            {page.map((pokemon) => (
+                                <PokemonCard key={pokemon.id} pokemon={pokemon} />
+                            ))}
+                        </>
                     ))
                 }
             </div>
