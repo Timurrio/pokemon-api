@@ -5,15 +5,17 @@ import fetchPokemon from "../../functions/fetchPokemon"
 import { useObserver } from "../../hooks/useIntersectionObserver"
 import PokemonCard from "./PokemonCard/PokemonCard"
 import { Search } from "./Search/Search"
-import { useAppSelector } from "../../app/hooks"
+import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import { filterPokemonNames } from "../../functions/filterPokemonNames"
 import loader from "../../assets/pokeballLoader.gif"
 import pikachuSleeping from "../../assets/pikachu-sleeping.png"
 import TypeButtonList from "./TypeButtonList/TypeButtonList"
 import { InfiniteData, QueryKey, useInfiniteQuery, useQuery } from "@tanstack/react-query"
+import { resetPokedexFilters } from "../../features/pokedexFilterSlice/pokedexFilterSlice"
 
 
 export const PokedexPage = () => {
+    const dispatch = useAppDispatch()
     const { types, search } = useAppSelector(state => state.pokedex)
 
     const { data: pokemonNames,
@@ -51,6 +53,10 @@ export const PokedexPage = () => {
             }
         }
     })
+
+    useEffect(() => {
+        dispatch(resetPokedexFilters())
+    }, [])
 
     useEffect(() => {
         refetchNames()

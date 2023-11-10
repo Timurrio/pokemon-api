@@ -70,10 +70,14 @@ const pokedexFilterSlice = createSlice({
         },
         setSearch: (state, action) => {
             state.search = action.payload
+        },
+        resetPokedexFilters: (state) => {
+            state.search = initialState.search
+            state.types = initialState.types
         }
     },
     initialState
 })
 
 export default pokedexFilterSlice.reducer
-export const { addType, removeType, setSearch } = pokedexFilterSlice.actions
+export const { addType, removeType, setSearch, resetPokedexFilters } = pokedexFilterSlice.actions
