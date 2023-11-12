@@ -12,6 +12,7 @@ import pikachuSleeping from "../../assets/pikachu-sleeping.png"
 import TypeButtonList from "./TypeButtonList/TypeButtonList"
 import { InfiniteData, QueryKey, useInfiniteQuery, useQuery } from "@tanstack/react-query"
 import { resetPokedexFilters } from "../../features/pokedexFilterSlice/pokedexFilterSlice"
+import { Fragment } from "react"
 
 
 export const PokedexPage = () => {
@@ -24,9 +25,7 @@ export const PokedexPage = () => {
             queryKey: ["pokemonNames"],
             initialData: [],
             queryFn: async () => {
-                console.log("pokemonNames query")
                 const names = await filterPokemonNames(search, types)
-                console.log(names)
                 return names
             }
         })
@@ -34,9 +33,9 @@ export const PokedexPage = () => {
     const { data: pokemons, fetchNextPage, isFetching: isPokemonsFetching, isFetchingNextPage } = useInfiniteQuery<Partial<IPokemon>[], Error, InfiniteData<Partial<IPokemon>[]>, QueryKey, number>({
         queryKey: ["pokemons", pokemonNames],
         initialPageParam: 0,
+        enabled: !isNamesFetching,
         getNextPageParam: (lastPage, pages, lastPageParam) => { return lastPageParam + 12 },
         queryFn: async ({ pageParam = 0 }): Promise<Partial<IPokemon>[]> => {
-            console.log("pokemons query")
             let arr: Partial<IPokemon>[] = []
             let limit: number = pokemonNames.length >= (Array.isArray(pokemons) ? pokemons.length : 0) + pageParam ? 12 : pokemonNames.length - (Array.isArray(pokemons) ? pokemons.length : 0) - 1
 
@@ -86,11 +85,11 @@ export const PokedexPage = () => {
             <div className={styles["cards-list"]}>
                 {
                     pokemons && pokemons.pages.map((page) => (
-                        <>
+                        <Fragment key={page[0]?.id}>
                             {page.map((pokemon) => (
                                 <PokemonCard key={pokemon.id} pokemon={pokemon} />
                             ))}
-                        </>
+                        </Fragment>
                     ))
                 }
             </div>
