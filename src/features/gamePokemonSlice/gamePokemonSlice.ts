@@ -43,6 +43,8 @@ const gamePokemonSlice = createSlice({
             }
             state.isGameStarted = false
             state.currentScore = 0
+            state.dataLoading = false
+            state.pokemons = []
         },
         startGame: (state) => {
             state.isGameStarted = true

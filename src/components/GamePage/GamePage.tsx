@@ -1,7 +1,7 @@
 import styles from './GamePage.module.scss'
 import { useEffect } from 'react'
 import Game from './Game/Game'
-import { fetchGamePokemons } from '../../features/gamePokemonSlice/gamePokemonSlice'
+import { endGame, fetchGamePokemons } from '../../features/gamePokemonSlice/gamePokemonSlice'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import GameLoader from './GameLoader/GameLoader'
 import Score from './Score/Score'
@@ -16,6 +16,7 @@ export default function GamePage() {
 
 
     useEffect(() => {
+        dispatch(endGame())
         dispatch(fetchGamePokemons())
     }, [])
 
