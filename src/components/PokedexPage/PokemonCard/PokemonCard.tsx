@@ -10,7 +10,7 @@ const PokemonCard: React.FC<{ pokemon: Partial<IPokemon> }> = ({ pokemon }) => {
         <Link className={styles.link_wrapper} to={`/${pokemon.id}`}>
             <div key={pokemon.id} className={styles.card}>
                 <div className={styles.image_container}>
-                    <img className={styles.image} src={pokemon.img} alt={pokemon.name} />
+                    <img width={150} height={150} className={styles.image} src={pokemon.img} alt={pokemon.name} />
                 </div>
                 <div className={styles.info_container}>
                     <p className={styles.pokemon_id}>№{pokemon.id}</p>
