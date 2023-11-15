@@ -23,11 +23,22 @@
     flex-direction: row;
     padding: 10px;
     width: 100%;
-    background-color: $light-green;
+    background-color: $black;
 }
 
 .info_table {
-    background-color: $white;
+    background-color: $black;
+    color: $white;
+    border-collapse: collapse;
+
+    p {
+        font-size: 30px;
+    }
+
+    th {
+        padding: 15px;
+        border: 4px solid $light-green;
+    }
 }
 
 .main_image {
@@ -52,6 +63,11 @@
     padding: 5px 10px;
     width: 100px;
     border-radius: 10px;
+}
+
+
+.ability {
+    background-color: $dark-green;
 }
 
 .stats {

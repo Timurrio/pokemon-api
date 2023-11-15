@@ -60,37 +60,39 @@ export const PokemonPage = () => {
                         <div className={styles.main_right}>
 
                             <table className={styles.info_table}>
-                                <tr>
-                                    <th><h2>Height</h2></th>
-                                    <th><p>{pokemon.height}</p></th>
-                                </tr>
-                                <tr>
-                                    <th><h2>Weight</h2></th>
-                                    <th><p>{pokemon.weight}</p></th>
-                                </tr>
-                                <tr>
-                                    <th><h2>Types</h2></th>
-                                    <th>
-                                        <div className={styles.types}>
-                                            {
-                                                pokemon.types.map((type) => (
-                                                    <span className={styles.pill + " " + type.type.name}>{type.type.name}</span>
-                                                ))
-                                            }
-                                        </div>
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th><h2>Abilities</h2></th>
-                                    <th>
-                                        <div className={styles.abilities}>
-                                            {
-                                                pokemon.abilities.map((ability) => (
-                                                    <span>{ability.ability.name}</span>
-                                                ))
-                                            }
-                                        </div></th>
-                                </tr>
+                                <tbody>
+                                    <tr>
+                                        <th><h2>Height</h2></th>
+                                        <th><p>{pokemon.height}</p></th>
+                                    </tr>
+                                    <tr>
+                                        <th><h2>Weight</h2></th>
+                                        <th><p>{pokemon.weight}</p></th>
+                                    </tr>
+                                    <tr>
+                                        <th><h2>Types</h2></th>
+                                        <th>
+                                            <div className={styles.types}>
+                                                {
+                                                    pokemon.types.map((type) => (
+                                                        <span className={styles.pill + " " + type.type.name}>{type.type.name}</span>
+                                                    ))
+                                                }
+                                            </div>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th><h2>Abilities</h2></th>
+                                        <th>
+                                            <div>
+                                                {
+                                                    pokemon.abilities.map((ability) => (
+                                                        <span className={`${styles.ability} ${styles.pill}`}>{ability.ability.name}</span>
+                                                    ))
+                                                }
+                                            </div></th>
+                                    </tr>
+                                </tbody>
                             </table>
 
                         </div>
