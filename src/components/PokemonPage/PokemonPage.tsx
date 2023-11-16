@@ -50,7 +50,7 @@ export const PokemonPage = () => {
         return (
             <div className={styles.page}>
                 <div className={styles.content}>
-                    <h1 className={styles.pokemon_name}>{pokemon.name} <span className={styles.pokemon_id}>{pokemon.id}</span></h1>
+                    <h1 className={styles.pokemon_name}>{pokemon.name} <span className={styles.pokemon_id}>№{pokemon.id}</span></h1>
 
                     <div className={styles.main}>
                         <div className={styles.main_left}>
@@ -102,7 +102,7 @@ export const PokemonPage = () => {
 
 
                     <div className={styles.stats}>
-                        <h2>Stats</h2>
+                        <h2 className={styles.section_header}>Stats</h2>
                         <table className={styles["stats-table"]}>
                             {
                                 pokemon.stats.map((stat) => (
@@ -122,7 +122,7 @@ export const PokemonPage = () => {
 
 
                     <div className={styles.sprites}>
-                        <h2>Sprites</h2>
+                        <h2 className={styles.section_header}>Sprites</h2>
                         <SpriteGallery sprites={pokemon.sprites} />
                     </div>
 
