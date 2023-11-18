@@ -1,11 +1,14 @@
+@import "../../../styles/variables.scss";
+
 .list {
     display: flex;
     padding: 10px;
     width: 100%;
-    max-width: 1200px;
+    max-width: 950px;
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
+    background-color: $black;
 }
 
 @media screen and (max-width: 550px) {

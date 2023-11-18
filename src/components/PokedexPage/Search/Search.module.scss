@@ -1,18 +1,24 @@
 @import "../../../styles/variables.scss";
 
 .container {
-    margin: 150px 0px 50px;
+    // margin: 150px 0px 50px;
     padding: 10px;
     max-width: 300px;
 }
 
 .input {
-    outline: 4px solid gray;
+    outline: 4px solid $dark-green;
+    background-color: $background-black;
+    color: $white;
     border: none;
     width: 100%;
     font-size: 24px;
     height: 40px;
     transition: all 0.3s;
+
+    &::placeholder {
+        color: $light-green;
+    }
 
     &:focus {
         outline: 4px solid $light-green;

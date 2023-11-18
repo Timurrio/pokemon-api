@@ -5,7 +5,20 @@
     flex-direction: column;
     align-items: center;
     max-width: 100%;
+    min-height: 100vh;
     overflow-x: hidden;
+    background-color: $background-black;
+}
+
+.filters {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 150px;
+    padding: 15px;
+    width: 100%;
+    background-color: $black;
 }
 
 .cards-list {
@@ -29,7 +42,10 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    color: $black;
+    width: 100%;
+    margin-top: 100px;
+    background-color: $black;
+    color: $white;
     font-size: 24px;
 }
 
@@ -55,6 +71,11 @@
         grid-template-columns: repeat(2, 1fr);
         gap: 20px;
         max-width: 100%;
+    }
+
+    .filters {
+        flex-direction: column;
+        gap: 30px;
     }
 }
 

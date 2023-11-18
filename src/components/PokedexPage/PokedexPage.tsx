@@ -78,8 +78,11 @@ export const PokedexPage = () => {
 
     return (
         <div className={styles.container}>
-            <Search />
-            <TypeButtonList />
+            <div className={styles.filters}>
+                <Search />
+                <TypeButtonList />
+            </div>
+
 
 
             <div className={styles["cards-list"]}>
