@@ -4,6 +4,7 @@ import PokedexPage from "./components/PokedexPage/PokedexPage";
 import Navbar from "./components/Navbar/Navbar";
 import { PokemonPage } from "./components/PokemonPage/PokemonPage";
 import ScrollToTopWrapper from "./components/ScrollToTopWrapper";
+import { ScrollTopButton } from "./components/ScrollTopButton/ScrollTopButton";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <BrowserRouter>
         <ScrollToTopWrapper>
           <Navbar />
+          <ScrollTopButton />
           <Routes>
             <Route path="/" element={<PokedexPage />} />
             <Route path="/:id" element={<PokemonPage />} />
