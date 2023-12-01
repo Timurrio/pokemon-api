@@ -78,7 +78,8 @@
     display: inline-block;
     margin: 5px;
     padding: 5px 10px;
-    width: 100px;
+    // width: 100px;
+    max-width: 100%;
     border-radius: 10px;
 }
 
@@ -132,6 +133,15 @@
     align-items: center;
     margin-left: auto;
     margin-right: 50px;
+}
+
+.loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $background-black;
+    width: 100vw;
+    height: 100vh;
 }
 
 @media screen and (max-width: 900px) {

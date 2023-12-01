@@ -42,7 +42,9 @@ export const PokedexPage = () => {
             try {
                 for (let i = pageParam; i < limit + pageParam; i++) {
                     let pokemon = await fetchPokemon(pokemonNames[i])
-                    arr.push(pokemon)
+                    if (Object.keys(pokemon).length > 0) {
+                        arr.push(pokemon)
+                    }
                 }
             } catch (e) {
                 console.log("fetchData error" + e)
