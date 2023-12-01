@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.84026aec.css",
+    "main.js": "/static/js/main.b508839d.js",
+    "static/media/pikachu-sleeping.png": "/static/media/pikachu-sleeping.7714c0479dddb14dadb7.png",
+    "static/media/green-pokedex-logo.png": "/static/media/green-pokedex-logo.86810d3a3ae4b39c5c1b.png",
+    "static/media/pokeballLoader.gif": "/static/media/pokeballLoader.e34e0da1936e86906d6b.gif",
+    "index.html": "/index.html",
+    "main.84026aec.css.map": "/static/css/main.84026aec.css.map",
+    "main.b508839d.js.map": "/static/js/main.b508839d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.84026aec.css",
+    "static/js/main.b508839d.js"
+  ]
+}
