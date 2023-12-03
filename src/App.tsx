@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import GamePage from "./components/GamePage/GamePage";
 import PokedexPage from "./components/PokedexPage/PokedexPage";
 import Navbar from "./components/Navbar/Navbar";
@@ -9,17 +9,17 @@ import { ScrollTopButton } from "./components/ScrollTopButton/ScrollTopButton";
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      <HashRouter>
         <ScrollToTopWrapper>
           <Navbar />
           <ScrollTopButton />
           <Routes>
-            <Route path="/" element={<PokedexPage />} />
+            <Route index path="/" element={<PokedexPage />} />
             <Route path="/:id" element={<PokemonPage />} />
             <Route path="/game" element={<GamePage />} />
           </Routes>
         </ScrollToTopWrapper>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }
