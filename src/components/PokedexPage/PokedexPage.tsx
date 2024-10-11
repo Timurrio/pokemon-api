@@ -40,12 +40,20 @@ export const PokedexPage = () => {
             let limit: number = pokemonNames.length >= (Array.isArray(pokemons) ? pokemons.length : 0) + pageParam ? 12 : pokemonNames.length - (Array.isArray(pokemons) ? pokemons.length : 0) - 1
 
             try {
+                const pokemonPromises: Promise<Partial<IPokemon>>[] = []
                 for (let i = pageParam; i < limit + pageParam; i++) {
-                    let pokemon = await fetchPokemon(pokemonNames[i])
-                    if (Object.keys(pokemon).length > 0) {
-                        arr.push(pokemon)
-                    }
+                    let pokemon = fetchPokemon(pokemonNames[i])
+                    pokemonPromises.push(pokemon)
                 }
+                await Promise.all(pokemonPromises).then( (pokemonArr) => {
+                    for(let pokemon of pokemonArr) {
+                        if (Object.keys(pokemon).length > 0) {
+                            arr.push(pokemon)
+                        }
+                    }
+
+                })
+
             } catch (e) {
                 console.log("fetchData error" + e)
             } finally {
@@ -87,17 +95,7 @@ export const PokedexPage = () => {
 
 
 
-            <div className={styles["cards-list"]}>
-                {
-                    pokemons && pokemons.pages.map((page) => (
-                        <Fragment key={page[0]?.id}>
-                            {page.map((pokemon) => (
-                                <PokemonCard key={pokemon.id} pokemon={pokemon} />
-                            ))}
-                        </Fragment>
-                    ))
-                }
-            </div>
+            <div className={styles["cards-list"]}>{pokemons && pokemons.pages.map((page) => (<Fragment key={page[0]?.id}>{page.map((pokemon) => (<PokemonCard key={pokemon.id} pokemon={pokemon} />))}</Fragment>))}</div>
 
             <div ref={observerRef} className={styles["loader"]}>
                 {
