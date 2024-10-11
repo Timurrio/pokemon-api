@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/pokemon-api/static/css/main.4d8ee09a.css",
-    "main.js": "/pokemon-api/static/js/main.da8c5555.js",
+    "main.css": "/pokemon-api/static/css/main.d768c398.css",
+    "main.js": "/pokemon-api/static/js/main.6ae66cc5.js",
     "static/media/pikachu-sleeping.png": "/pokemon-api/static/media/pikachu-sleeping.7714c0479dddb14dadb7.png",
     "static/media/green-pokedex-logo.png": "/pokemon-api/static/media/green-pokedex-logo.86810d3a3ae4b39c5c1b.png",
     "static/media/pokeballLoader.gif": "/pokemon-api/static/media/pokeballLoader.e34e0da1936e86906d6b.gif",
     "index.html": "/pokemon-api/index.html",
-    "main.4d8ee09a.css.map": "/pokemon-api/static/css/main.4d8ee09a.css.map",
-    "main.da8c5555.js.map": "/pokemon-api/static/js/main.da8c5555.js.map"
+    "main.d768c398.css.map": "/pokemon-api/static/css/main.d768c398.css.map",
+    "main.6ae66cc5.js.map": "/pokemon-api/static/js/main.6ae66cc5.js.map"
   },
   "entrypoints": [
-    "static/css/main.4d8ee09a.css",
-    "static/js/main.da8c5555.js"
+    "static/css/main.d768c398.css",
+    "static/js/main.6ae66cc5.js"
   ]
 }
